@@ -1,0 +1,21 @@
+{
+  "name": "Netflix subtitles styler",
+  "version": "1.0",
+  "description": "Netflix subtitles styler",
+  "permissions": [
+    "activeTab",
+    "declarativeContent",
+    "storage",
+    "https://twistezo.github.io/portfolio/",
+    "https://*.netflix.com/"
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "page_action": {
+    "default_popup": "popup.html",
+    "default_icon": "logo.png"
+  },
+  "manifest_version": 2
+}
