@@ -33,3 +33,7 @@ Currently extension is not in Chrome Webstore so for using:
 - download repository
 - go to `chrome://extensions/` in browser
 - click `Load unpacked`, select folder and that's it
+
+### Latest version
+
+ <img src="https://i.imgur.com/0KeFvxt.png">
