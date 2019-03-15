@@ -5,12 +5,6 @@ chrome.runtime.onInstalled.addListener(() => {
       {
         conditions: [
           new chrome.declarativeContent.PageStateMatcher({
-            pageUrl: { hostSuffix: 'twistezo.github.io' }
-          }),
-          new chrome.declarativeContent.PageStateMatcher({
-            pageUrl: { hostSuffix: 'chrome.com' }
-          }),
-          new chrome.declarativeContent.PageStateMatcher({
             pageUrl: { hostSuffix: 'netflix.com' }
           })
         ],
