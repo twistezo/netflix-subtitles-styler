@@ -1,4 +1,5 @@
 chrome.runtime.onInstalled.addListener(() => {
+  // Acces to popup
   chrome.declarativeContent.onPageChanged.removeRules(undefined, () => {
     chrome.declarativeContent.onPageChanged.addRules([
       {
@@ -19,33 +20,27 @@ chrome.runtime.onInstalled.addListener(() => {
   })
 
   // on active tab update (ex. load/refresh)
-  chrome.tabs.onUpdated.addListener((_tabId, changeInfo, tab) => {
+  chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     if (changeInfo.status == 'complete' && tab.active) {
       chrome.storage.local.get(['vPos', 'fSize'], data => {
         if (Object.keys(data).length === 0 && data.constructor === Object) {
           chrome.storage.local.set({ vPos: 300, fSize: 24 })
         }
+        chrome.tabs.executeScript(
+          tabId,
+          {
+            file: 'script.js'
+          },
+          () => {
+            const error = chrome.runtime.lastError
+            if (error) 'Error. Tab ID: ' + tab.id + ': ' + JSON.stringify(error)
 
-        chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-          chrome.tabs.executeScript(
-            tabs[0].id,
-            {
-              file: 'script.js'
-            },
-            () => {
-              const lastErr = chrome.runtime.lastError
-              // TODO: fix this
-              if (lastErr)
-                console.log(
-                  'tab: ' + tab.id + ' lastError: ' + JSON.stringify(lastErr)
-                )
-              chrome.tabs.sendMessage(tabs[0].id, {
-                vPos: data.vPos,
-                fSize: data.fSize
-              })
-            }
-          )
-        })
+            chrome.tabs.sendMessage(tabId, {
+              vPos: data.vPos,
+              fSize: data.fSize
+            })
+          }
+        )
       })
     }
   })

@@ -1,13 +1,32 @@
 <!DOCTYPE html>
 <html>
-  <head> </head>
+  <head>
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:400,600"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="popup.css" />
+  </head>
   <body>
-    Vertical position (from bottom)<br />
-    <input id="vPos" type="text" minlength="1" maxlength="3" value="" />
-    <br />
-    Font size<br />
-    <input id="fSize" type="text" minlength="1" maxlength="2" value="" />
-    <button id="change">Change</button>
+    <div class="container logo">
+      NETFLIX SUBTITLES STYLER
+    </div>
+    <div class="container">
+      <div class="input-info">Vertical position from bottom [px]</div>
+      <input class="form-control" id="vPos" type="text" value="" />
+      <div class="input-info">Font size [px]</div>
+      <input id="fSize" type="text" value="" />
+      <div id="error"></div>
+      <button id="change">Change</button>
+    </div>
+    <div class="container footer">
+      <a
+        href="https://twistezo.github.io/portfolio/"
+        target="_blank"
+        rel="noopener"
+        >&copy; twistezo, 2019</a
+      >
+    </div>
     <script src="popup.js"></script>
   </body>
 </html>

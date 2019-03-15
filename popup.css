@@ -1,0 +1,72 @@
+body {
+    --red: #E50914;
+    --gray: #EEEEEE;
+    font-family: 'Open Sans', sans-serif !important;
+    margin: 0px !important;
+    width: 220px;
+    background-color: white;
+    color: black;
+}
+
+.container {
+    padding: 15px 10px 15px 10px;
+    text-align: center;
+}
+
+.logo {
+    background-color: var(--gray);
+    color: var(--red);
+    font-weight: 600;
+    font-size: 14px;
+    word-spacing: 5px;
+}
+
+.input-info {
+    padding: 6px 0px 6px 0px;
+}
+
+.footer {
+    background-color: var(--gray);
+    margin-top: 8px;
+    text-align: center;
+}
+
+.footer a {
+    color: black;
+    text-decoration: none;
+}
+
+.footer a:hover, a:focus, a:active {
+    color: var(--red);
+}
+
+#error {
+    color: var(--red);
+    padding: 6px;
+}
+
+input {
+    border: solid 1px black;
+    border-radius: 5px;
+    padding: 6px;
+}
+
+input:hover, input:active, input:focus {
+    border: solid 1px var(--red);
+    outline: none;
+}
+
+button {
+    margin-top: 15px;
+    background-color: var(--gray);
+    color: black;
+    padding: 6px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+button:hover, button:active, button:focus {
+    outline: none;
+    background-color: var(--red);
+    color: black;
+}

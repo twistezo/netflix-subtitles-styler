@@ -2,11 +2,13 @@
   "name": "Netflix subtitles styler",
   "version": "1.0",
   "description": "Netflix subtitles styler",
+  "author": "twistezo",
+  "homepage_url": "https://twistezo.github.io/portfolio/",
   "permissions": [
     "activeTab",
-    "declarativeContent",
+    "tabs",
     "storage",
-    "https://twistezo.github.io/portfolio/",
+    "declarativeContent",
     "https://*.netflix.com/"
   ],
   "background": {

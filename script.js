@@ -3,16 +3,16 @@
  */
 
 chrome.runtime.onMessage.addListener((message, _sender, _sendResponse) => {
-  console.log('%cnetflix-subtitles-styler : new data: ', 'color: red;', message)
+  console.log('%cnetflix-subtitles-styler : data: ', 'color: red;', message)
   changeSubtitlesStyle(message.vPos, message.fSize)
 })
 
 changeSubtitlesStyle = (vPos, fSize) => {
+  console.log(
+    '%cnetflix-subtitles-styler : observer is working... ',
+    'color: red;'
+  )
   callback = () => {
-    console.log(
-      '%cnetflix-subtitles-styler : observer is working... ',
-      'color: red;'
-    )
     // .player-timedText
     const subtitles = document.querySelector('.player-timedtext')
     if (subtitles) {
