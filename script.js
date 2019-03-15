@@ -1,13 +1,13 @@
 /**
- * Change vertical position, font size and remove background in Netflix subtitles.
+ * Change vertical position, font size, font color and remove background in Netflix subtitles.
  */
 
 chrome.runtime.onMessage.addListener((message, _sender, _sendResponse) => {
   console.log('%cnetflix-subtitles-styler : data: ', 'color: red;', message)
-  changeSubtitlesStyle(message.vPos, message.fSize)
+  changeSubtitlesStyle(message.vPos, message.fSize, message.fColor)
 })
 
-changeSubtitlesStyle = (vPos, fSize) => {
+changeSubtitlesStyle = (vPos, fSize, fColor) => {
   console.log(
     '%cnetflix-subtitles-styler : observer is working... ',
     'color: red;'
@@ -34,6 +34,7 @@ changeSubtitlesStyle = (vPos, fSize) => {
             // .player-timedtext > .player-timedtext-container [1] > span
             span.style.fontSize = fSize + 'px'
             span.style.fontWeight = 'normal'
+            span.style.color = fColor
           }
           secondChildContainer.style.left = '0'
           secondChildContainer.style.right = '0'

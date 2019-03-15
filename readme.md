@@ -10,6 +10,7 @@ Netflix subtitles:
 
 - change position
 - change font size
+- change font color
 - remove background shadow
 
 Extension:
@@ -36,4 +37,4 @@ Currently extension is not in Chrome Webstore so for using:
 
 ### Latest version
 
- <img src="https://i.imgur.com/0KeFvxt.png">
+ <img src="https://i.imgur.com/kt6CeVw.png">

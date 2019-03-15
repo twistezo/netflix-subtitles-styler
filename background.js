@@ -16,9 +16,9 @@ chrome.runtime.onInstalled.addListener(() => {
   // on active tab update (ex. load/refresh)
   chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     if (changeInfo.status == 'complete' && tab.active) {
-      chrome.storage.local.get(['vPos', 'fSize'], data => {
+      chrome.storage.local.get(['vPos', 'fSize', 'fColor'], data => {
         if (Object.keys(data).length === 0 && data.constructor === Object) {
-          chrome.storage.local.set({ vPos: 300, fSize: 24 })
+          chrome.storage.local.set({ vPos: 300, fSize: 24, fColor: '#ffffff' })
         }
         chrome.tabs.executeScript(
           tabId,
@@ -31,7 +31,8 @@ chrome.runtime.onInstalled.addListener(() => {
 
             chrome.tabs.sendMessage(tabId, {
               vPos: data.vPos,
-              fSize: data.fSize
+              fSize: data.fSize,
+              fColor: data.fColor
             })
           }
         )
