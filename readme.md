@@ -23,10 +23,6 @@ Extension:
 
 Google Chrome API, JavaScript
 
-### Requirements
-
-Google Chrome
-
 ### Usage
 
 Currently extension is not in Chrome Webstore so for using:
