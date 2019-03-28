@@ -21,7 +21,7 @@ Extension:
 
 ### Tools
 
-Google Chrome API, JavaScript
+Chrome-API, JavaScript
 
 ### Usage
 
