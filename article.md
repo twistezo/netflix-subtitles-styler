@@ -10,7 +10,9 @@
 6. [Time to run](#6)
 7. [Conclusions](#7)
 
-# What will we create? <a name="1"></a>
+<a name="1"></a>
+
+# What will we create?
 
 Today we will create Google Chrome extension for manipule Netflix subtitles styles in real time. You find here informations about creating extension from scratch, some practical advices and general view on extension architecture. Or if you are not satisfy about Netflix subtitles options or just want to quickly create some making life easier extension this article isfor you.
 
@@ -28,7 +30,9 @@ Requirements:
 
 Netflix by its API sends every subtitles sentence separately. It uses CSS styles for styling subtitles. With access to the page DOM we can manipulate those received styles with Chrome extension.
 
-# The Manifest <a name="2"></a>
+<a name="2"></a>
+
+# The Manifest
 
 Firstly we should create the manifest file called `manifest.json`. It gives to the browser informations about the extension such as the UI files, background scripts and the capabilities the extension might use.
 
@@ -61,7 +65,9 @@ In our case we need have access to `tabs` for possibility to find active tab, ex
 
 Chrome extensions have separate logic from UI so we need to have `background.scripts` which tells the extension where it can find its logic. `persistent: false` means that this script will be used only if needed. `page_action` is section with UI part. Here we have simple HTML file for popup menu and extension PNG logo.
 
-# Extension logic <a name="3"></a>
+<a name="3"></a>
+
+# Extension logic
 
 Firstly we have to setup `runtime.onInstalled` behaviour, remove currently rules if exists (ex. from older version) and declare function to add new rules. We use Local Storage for store settings so we can set default settings while extension installed.
 
@@ -128,7 +134,9 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
 Firstly we check that `changeInfo.status` has status `complete`. It means that the website on this tab is loaded. Then we get settings from Local Storage and declare which script should be run on current tab with `tabId`. On the end in callback we send the message with settings from UI to script.
 
-# Extension UI <a name="4"></a>
+<a name="4"></a>
+
+# Extension UI
 
 To create extension popup menu with form we create three files. `popup.html` and `popup.css` with visual layer and `popup.js` with logic for communicate between menu and isolated `background.js` script.
 
@@ -204,7 +212,9 @@ form.addEventListener("submit", event => {
 
 In this script we load settings from Local Storage and attach them to form inputs. Then we create listener to `submit` event with functions for save settings to Local Storage and send them by message to background script. As you see in every component we use Local Storage. It is caused that Chrome extension don't have its own data space so the simplest solution is to use browser local space. Also we comonnly use `sendMessage` function. It's by extensions architecture - separate logic from UI.
 
-# Script for manipulate subtitles styles <a name="5"></a>
+<a name="5"></a>
+
+# Script for manipulate subtitles styles
 
 At the end we create `script.js` with logic for manipulate subtitles styles.
 
@@ -264,11 +274,15 @@ changeSubtitlesStyle = (vPos, fSize, fColor) => {
 
 Netflix works that every time when receive whole subtitle sentence swaps only the subtitles part in the page DOM. So we have to create Observer function which will be triggering our `changeSubtitlesStyle` function every time when the page DOM has changed. In `callback` function we see simple manipulate of styles. In commented lines you have infomations about where you can find proper styles.
 
-# Time to run <a name="6"></a>
+<a name="6"></a>
+
+# Time to run
 
 I assume that you have not developer account in Chrome Webstore. To run this extension go to `chrome://extensions/` in your Chrome, click `Load unpacked`, select folder with extension and that's it! Then obviously go to Netflix page for testing it.
 
-# Conclusions <a name="7"></a>
+<a name="7"></a>
+
+# Conclusions
 
 As you see it's easy to start writing some making life easier extension. The most important part is to understand Google Chrome Extension divided architecture and communication between components. This subtitles styler is only simple demo of what you can do with extension API.
 
