@@ -38,7 +38,7 @@ Firstly we should create the manifest file called `manifest.json`. It gives to t
 
 Here is complete manifest.
 
-```
+```json
 {
   "name": "Netflix subtitles styler",
   "version": "1.0",
@@ -79,7 +79,7 @@ We will be use three subtitles style parameters:
 
 Create `background.js`:
 
-```
+```javascript
 chrome.runtime.onInstalled.addListener(() => {
   chrome.storage.local.set({ vPos: 300, fSize: 24, fColor: "#FFFFFF" });
 
@@ -94,7 +94,7 @@ chrome.runtime.onInstalled.addListener(() => {
 
 Our rule goal is to disable extension button on all other domain than `netflix.com`. We create new rule with `PageStateMatcher` condition and declare `ShowPageAction` where new rule will be assigned.
 
-```
+```javascript
 {
   conditions: [
     new chrome.declarativeContent.PageStateMatcher({
@@ -107,7 +107,7 @@ Our rule goal is to disable extension button on all other domain than `netflix.c
 
 The next step is add `tabs.onUpdated` listener which will execute our script while load or refresh active tab.
 
-```
+```javascript
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (changeInfo.status === "complete" && tab.active) {
     chrome.storage.local.get(["vPos", "fSize", "fColor"], data => {
@@ -146,7 +146,7 @@ Our visual goal:
 
 Here you have simple HTML form with built-in validation - `popup.html`:
 
-```
+```html
 <!DOCTYPE html>
 <html>
   <head>
@@ -178,7 +178,7 @@ Styling this popup menu is not the goal of this article so I suggest to visit ht
 
 UI logic - `popup.js`:
 
-```
+```javascript
 const form = document.getElementById("popup-form");
 const inputElements = ["vPos", "fSize", "fColor"];
 
@@ -220,7 +220,7 @@ At the end we create `script.js` with logic for manipulate subtitles styles.
 
 Firstly for receiving messages with settings from extension we create `onMessage` listener.
 
-```
+```javascript
 chrome.runtime.onMessage.addListener((message, _sender, _sendResponse) => {
   // function for manipulating styles
 });
@@ -228,7 +228,7 @@ chrome.runtime.onMessage.addListener((message, _sender, _sendResponse) => {
 
 Then in the same file we create function for changing proper Netflix styles to our in real time.
 
-```
+```javascript
 changeSubtitlesStyle = (vPos, fSize, fColor) => {
   console.log("%cnetflix-subtitles-styler : observer is working... ", "color: red;");
 
