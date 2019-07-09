@@ -2,17 +2,17 @@
 
 # Table of Contents
 
-1. [What will we create?](#1)
+1. [Prelude](#1)
 2. [The Manifest](#2)
 3. [Extension logic](#3)
 4. [Extension UI](#4)
-5. [Script for manipulate subtitles styles](#5)
+5. [The script](#5)
 6. [Time to run](#6)
 7. [Conclusions](#7)
 
 <a name="1"></a>
 
-# What will we create?
+# Prelude
 
 Today we will create Google Chrome extension for manipule Netflix subtitles styles in real time. You find here informations about creating extension from scratch, some practical advices and general view on extension architecture. Or if you are not satisfied about Netflix subtitles available options or just want to quickly create some making life easier extension this article is for you.
 
