@@ -213,7 +213,7 @@ In above script we load settings from Local Storage and attach them to form inpu
 
 <a name="5"></a>
 
-# Script for manipulate subtitles styles
+# The script
 
 Now it is time to create `script.js` with logic for manipulate Netflix subtitles styles.
 
