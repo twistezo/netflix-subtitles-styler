@@ -1,33 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans:400,600"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet" />
     <link rel="stylesheet" href="popup.css" />
   </head>
   <body>
     <div class="container logo">
       NETFLIX SUBTITLES STYLER
     </div>
-    <div class="container">
+    <form id="popup-form" class="container">
       <div class="input-info">Vertical position from bottom [px]</div>
-      <input class="form-control" id="vPos" type="text" value="" />
+      <input class="form-control" id="vPos" type="number" value="" min="0" max="5000" />
       <div class="input-info">Font size [px]</div>
-      <input id="fSize" type="text" value="" />
+      <input id="fSize" type="number" value="" min="0" max="300" />
       <div class="input-info">Font color [HEX]</div>
-      <input id="fColor" type="text" value="" />
-      <div id="error"></div>
-      <button id="change">Change</button>
-    </div>
+      <input id="fColor" type="text" value="" pattern="^#[0-9A-F]{6}$" />
+      <button id="change" type="submit">Change</button>
+    </form>
     <div class="container footer">
-      <a
-        href="https://twistezo.github.io/portfolio/"
-        target="_blank"
-        rel="noopener"
-        >&copy; twistezo, 2019</a
-      >
+      &copy; twistezo, 2019
     </div>
     <script src="popup.js"></script>
   </body>

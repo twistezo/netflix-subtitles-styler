@@ -1,52 +1,44 @@
-/**
- * Change vertical position, font size, font color and remove background in Netflix subtitles.
- */
-
 chrome.runtime.onMessage.addListener((message, _sender, _sendResponse) => {
-  console.log('%cnetflix-subtitles-styler : data: ', 'color: red;', message)
-  changeSubtitlesStyle(message.vPos, message.fSize, message.fColor)
-})
+  changeSubtitlesStyle(message.vPos, message.fSize, message.fColor);
+});
 
 changeSubtitlesStyle = (vPos, fSize, fColor) => {
-  console.log(
-    '%cnetflix-subtitles-styler : observer is working... ',
-    'color: red;'
-  )
+  console.log("%cnetflix-subtitles-styler : observer is working... ", "color: red;");
   callback = () => {
     // .player-timedText
-    const subtitles = document.querySelector('.player-timedtext')
+    const subtitles = document.querySelector(".player-timedtext");
     if (subtitles) {
-      subtitles.style.bottom = vPos + 'px'
+      subtitles.style.bottom = vPos + "px";
 
       // .player-timedtext > .player-timedtext-container [0]
-      const firstChildContainer = subtitles.firstChild
+      const firstChildContainer = subtitles.firstChild;
       if (firstChildContainer) {
         // .player-timedtext > .player-timedtext-container [0] > div
-        const firstChild = firstChildContainer.firstChild
+        const firstChild = firstChildContainer.firstChild;
         if (firstChild) {
-          firstChild.style.backgroundColor = 'transparent'
+          firstChild.style.backgroundColor = "transparent";
         }
 
         // .player-timedtext > .player-timedtext-container [1]
-        const secondChildContainer = firstChildContainer.nextSibling
+        const secondChildContainer = firstChildContainer.nextSibling;
         if (secondChildContainer) {
           for (const span of secondChildContainer.childNodes) {
             // .player-timedtext > .player-timedtext-container [1] > span
-            span.style.fontSize = fSize + 'px'
-            span.style.fontWeight = 'normal'
-            span.style.color = fColor
+            span.style.fontSize = fSize + "px";
+            span.style.fontWeight = "normal";
+            span.style.color = fColor;
           }
-          secondChildContainer.style.left = '0'
-          secondChildContainer.style.right = '0'
+          secondChildContainer.style.left = "0";
+          secondChildContainer.style.right = "0";
         }
       }
     }
-  }
+  };
 
-  const observer = new MutationObserver(callback)
+  const observer = new MutationObserver(callback);
   observer.observe(document.body, {
     subtree: true,
     attributes: false,
     childList: true
-  })
-}
+  });
+};

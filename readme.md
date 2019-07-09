@@ -8,15 +8,15 @@ Google Chrome browser extension for manipulate styles of Netflix subtitles.
 
 Netflix subtitles:
 
-- change position
+- change vertical position from bottom
 - change font size
 - change font color
 - remove background shadow
 
 Extension:
 
-- autoload while Netflix website is active
-- store input data in Chrome local storage
+- autoload while Netflix website is on active tab
+- store input data in browser Local Storage
 - form validation
 
 ### Tools
