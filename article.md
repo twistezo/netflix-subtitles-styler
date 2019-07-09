@@ -14,12 +14,12 @@
 
 # What will we create?
 
-Today we will create Google Chrome extension for manipule Netflix subtitles styles in real time. You find here informations about creating extension from scratch, some practical advices and general view on extension architecture. Or if you are not satisfy about Netflix subtitles options or just want to quickly create some making life easier extension this article isfor you.
+Today we will create Google Chrome extension for manipule Netflix subtitles styles in real time. You find here informations about creating extension from scratch, some practical advices and general view on extension architecture. Or if you are not satisfied about Netflix subtitles available options or just want to quickly create some making life easier extension this article is for you.
 
 Our goals:
 
 - create extension logic
-- store settings in browser local storage
+- store settings in browser Local Storage
 - autoload and activate extension only on Netflix page
 - create popup menu
 - create form with subtitles options
@@ -28,13 +28,13 @@ Requirements:
 
 - basic knowledge of HTML, CSS and JavaScript
 
-Netflix by its API sends every subtitles sentence separately. It uses CSS styles for styling subtitles. With access to the page DOM we can manipulate those received styles with Chrome extension.
+Netflix by its API sends every subtitle sentence separately. It uses CSS styles for styling subtitles. With access to the page DOM we can manipulate those received styles with Chrome extension.
 
 <a name="2"></a>
 
 # The Manifest
 
-Firstly we should create the manifest file called `manifest.json`. It gives to the browser informations about the extension such as the UI files, background scripts and the capabilities the extension might use.
+Firstly we have to create the manifest file called `manifest.json`. It tells browser about the extension setup such as the UI files, background scripts and the capabilities the extension might use.
 
 Here is complete manifest.
 
@@ -57,19 +57,19 @@ Here is complete manifest.
 }
 ```
 
-As you see we have a couple of standard informations like `name`, `version`, `description`, `homepage_url` and `manifest_version`.
+As you see we have a couple of standard information like `name`, `version`, `description`, `homepage_url` and `manifest_version`.
 
 One of the important part of manifest is `permissions` section. It is an array with elements which our extension can have access.
 
-In our case we need have access to `tabs` for possibility to find active tab, execute scripts and send message between UI and background script. We need `storage` for store extension settings in browser. `declarativeContent` for take actions depending on the tab content. The last element `https://*.netflix.com/` is for allow extension acces only on `netflix.com` domain.
+In our case we need to have access to `tabs` for possibility to find active tab, execute scripts and send message between UI and extension. We need `storage` for store extension settings in browser and `declarativeContent` for taking actions depended on the tab content. The last element `https://*.netflix.com/` is for allow extension acces only to `netflix.com` domain.
 
-Chrome extensions have separate logic from UI so we need to have `background.scripts` which tells the extension where it can find its logic. `persistent: false` means that this script will be used only if needed. `page_action` is section with UI part. Here we have simple HTML file for popup menu and extension PNG logo.
+Chrome extensions have separate logic from UI so we need to have `background.scripts` which tells the extension where it can find its logic. `persistent: false` means that this script will be used only if needed. `page_action` is section with UI part. We have here simple HTML file for popup menu and extension's PNG logo.
 
 <a name="3"></a>
 
 # Extension logic
 
-Firstly we have to setup `runtime.onInstalled` behaviour, remove currently rules if exists (ex. from older version) and declare function to add new rules. We use Local Storage for store settings so we can set default settings while extension installed.
+Firstly we have to setup `runtime.onInstalled` behaviour, remove currently rules if exists (ex. from older version) and declare function to add new rules. We use Local Storage for store settings so we can set default settings after extension installed.
 
 We will be use three subtitles style parameters:
 
@@ -89,7 +89,6 @@ chrome.runtime.onInstalled.addListener(() => {
     ]);
   });
 });
-
 ```
 
 Our rule goal is to disable extension button on all other domain than `netflix.com`. We create new rule with `PageStateMatcher` condition and declare `ShowPageAction` where new rule will be assigned.
@@ -132,7 +131,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 });
 ```
 
-Firstly we check that `changeInfo.status` has status `complete`. It means that the website on this tab is loaded. Then we get settings from Local Storage and declare which script should be run on current tab with `tabId`. On the end in callback we send the message with settings from UI to script.
+Firstly we check that `changeInfo.status` has status `complete`. It means that the website on this tab is loaded. Then we get settings from Local Storage and declare which script should be run on current tab with `tabId`. At the end in callback we send the message with settings from UI to script.
 
 <a name="4"></a>
 
@@ -140,11 +139,11 @@ Firstly we check that `changeInfo.status` has status `complete`. It means that t
 
 To create extension popup menu with form we create three files. `popup.html` and `popup.css` with visual layer and `popup.js` with logic for communicate between menu and isolated `background.js` script.
 
-Our visual goal:
+Our UI goal:
 
 <img src="https://i.imgur.com/kt6CeVw.png">
 
-Here you have simple HTML form with built-in validation - `popup.html`:
+Here we have simple HTML form with built-in validation - `popup.html`:
 
 ```html
 <!DOCTYPE html>
@@ -174,7 +173,7 @@ Here you have simple HTML form with built-in validation - `popup.html`:
 </html>
 ```
 
-Styling this popup menu is not the goal of this article so I suggest to visit https://github.com/twistezo/netflix-subtitles-styler and check or copy whole `popup.css` file.
+Styling this popup menu is not the goal of this article so I suggest to visit https://github.com/twistezo/netflix-subtitles-styler and copy whole `popup.css` file to your project.
 
 UI logic - `popup.js`:
 
@@ -210,13 +209,13 @@ form.addEventListener("submit", event => {
 });
 ```
 
-In this script we load settings from Local Storage and attach them to form inputs. Then we create listener to `submit` event with functions for save settings to Local Storage and send them by message to background script. As you see in every component we use Local Storage. It is caused that Chrome extension don't have its own data space so the simplest solution is to use browser local space. Also we comonnly use `sendMessage` function. It's by extensions architecture - separate logic from UI.
+In above script we load settings from Local Storage and attach them to form inputs. Then we create listener to `submit` event with functions for save settings to Local Storage and send them by message to our script. As you see in every component we use Local Storage. It is caused that Chrome extension don't have its own data space so the simplest solution is to use browser local space like Local Storage. Also we often use `sendMessage` function. It's by extensions architecture - separated logic from UI.
 
 <a name="5"></a>
 
 # Script for manipulate subtitles styles
 
-At the end we create `script.js` with logic for manipulate subtitles styles.
+Now it is time to create `script.js` with logic for manipulate Netflix subtitles styles.
 
 Firstly for receiving messages with settings from extension we create `onMessage` listener.
 
@@ -272,22 +271,22 @@ changeSubtitlesStyle = (vPos, fSize, fColor) => {
 };
 ```
 
-Netflix works that every time when receive whole subtitle sentence swaps only the subtitles part in the page DOM. So we have to create Observer function which will be triggering our `changeSubtitlesStyle` function every time when the page DOM has changed. In `callback` function we see simple manipulate of styles. In commented lines you have infomations about where you can find proper styles.
+Netflix works that every time when receive whole subtitle sentence it swaps only the subtitles part of the page DOM. So we have to use observer function like `MutationObserver` which will be triggering our `changeSubtitlesStyle` function every time when the page DOM has changed. In `callback` function we see simple manipulate of styles. In commented lines you have infomations about where you can find proper styles.
 
 <a name="6"></a>
 
 # Time to run
 
-I assume that you have not developer account in Chrome Webstore. To run this extension go to `chrome://extensions/` in your Chrome, click `Load unpacked`, select folder with extension and that's it! Then obviously go to Netflix page for testing it.
+I assume that you have not developer account in Chrome Webstore. So to run this extension go to `chrome://extensions/` in your Chrome, click `Load unpacked`, select folder with extension and that's it! Then obviously go to Netflix page for testing it.
 
 <a name="7"></a>
 
 # Conclusions
 
-As you see it's easy to start writing some making life easier extension. The most important part is to understand Google Chrome Extension divided architecture and communication between components. This subtitles styler is only simple demo of what you can do with extension API.
+As you see it is easy to start creating some making life easier extension. The most important part is to understand Google Chrome Extension divided architecture and communication between components. This subtitles styler is only simple demo of what you can do with the Chrome Extension API.
 
 Useful links:
 
 - Repository with this project https://github.com/twistezo/netflix-subtitles-styler
-- Official guide https://developer.chrome.com/extensions/overview
-- Extension API https://developer.chrome.com/extensions/api_index
+- Official Google guide https://developer.chrome.com/extensions/overview
+- Chrome Extension API https://developer.chrome.com/extensions/api_index
